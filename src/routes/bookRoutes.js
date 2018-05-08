@@ -1,4 +1,5 @@
 const express = require('express');
+
 const bookRouter = express.Router();
 
 const books = [
@@ -40,9 +41,17 @@ bookRouter.route('/')
     );
   });
 
-bookRouter.route('/single')
+bookRouter.route('/:id')
   .get((req, res) => {
-    res.render('book');
+    const { id } = req.params;
+    res.render(
+      'book',
+      {
+        title: 'Library',
+        nav: [{ title: 'Books', link: '/books' }, { title: 'Authors', link: '/authors' }],
+        book: books[id]
+      }
+    );
   });
 
 module.exports = bookRouter;
