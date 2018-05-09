@@ -4,9 +4,10 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
 
+const nav = [{ title: 'Book', link: '/books' }, { title: 'Author', link: '/authors' }];
 const app = express();
 const port = process.env.PORT || 3000;
-const bookRouter = require('./src/routes/bookRoutes');
+const bookRouter = require('./src/routes/bookRoutes')(nav);
 
 app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
     'index',
     {
       title: 'Library',
-      nav: [{ title: 'Books', link: '/books' }, { title: 'Authors', link: '/authors' }]
+      nav
     }
   );
 });
