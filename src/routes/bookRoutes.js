@@ -1,4 +1,5 @@
 const express = require('express');
+
 const bookRouter = express.Router();
 
 function router(nav) {
@@ -56,6 +57,5 @@ function router(nav) {
 
   return bookRouter;
 }
-
 
 module.exports = router;
