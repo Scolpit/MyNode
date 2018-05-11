@@ -8,14 +8,8 @@ function router(nav) {
   authRouter.route('/signup')
     .post((req, res) => {
       debug(req.body);
-      res.send('hellosdfg');
+      res.json(req.body);
     });
-
-  authRouter.route('/')
-    .get((req, res) => {
-      res.send('hello');
-    });
-
 
   return authRouter;
 }
