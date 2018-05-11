@@ -1,45 +1,40 @@
 const express = require('express');
+const { MongoClient } = require('mongodb');
+const debug = require('debug')('app:bookRoutes');
 
 const bookRouter = express.Router();
 
 function router(nav) {
-  const books = [
-    {
-      title: 'Titulo1',
-      genre: 'Drama',
-      author: 'Autor1',
-      read: false
-    },
-    {
-      title: 'Titulo2',
-      genre: 'Historico',
-      author: 'Autor2',
-      read: false
-    },
-    {
-      title: 'Titulo3',
-      genre: 'Policial',
-      author: 'Autor3',
-      read: false
-    },
-    {
-      title: 'Titulo4',
-      genre: 'Romance',
-      author: 'Autor4',
-      read: false
-    }
-  ];
-
   bookRouter.route('/')
     .get((req, res) => {
-      res.render(
-        'bookListView',
-        {
-          title: 'Library',
-          nav,
-          books
+      const url = 'mongodb://localhost:27017';
+      const dbName = 'libraryApp';
+
+      (async function mongo() {
+        let client;
+        try {
+          client = await MongoClient.connect(url);
+          debug('Connected correctly');
+
+          const db = client.db(dbName);
+
+          const col = await db.collection('books');
+          const books = await col.find().toArray();
+
+          res.render(
+            'bookListView',
+            {
+              title: 'Library',
+              nav,
+              books
+            }
+          );
+        } catch (e) {
+          debug(e.stack);
+        } finally {
+          client.close();
         }
-      );
+      }());
     });
 
   bookRouter.route('/:id')
