@@ -1,7 +1,9 @@
 const passport = require('passport');
-const { Strategy } = require('passport.local');
+const { Strategy } = require('passport-local');
+const { MongoClient } = require('mongodb');
+const debug = require('debug')('app:local.strategy');
 
-function localStrategy() {
+module.exports = function localStrategy() {
   passport.use(new Strategy({
     usernameField: 'username',
     passwordField: 'password'
@@ -11,6 +13,4 @@ function localStrategy() {
     };
     done(null, user);
   }));
-}
-
-module.exports = localStrategy;
+};

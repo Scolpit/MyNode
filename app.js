@@ -8,7 +8,6 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const nav = [{ title: 'Book', link: '/books' }, { title: 'Author', link: '/authors' }];
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -25,6 +24,8 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 
 app.use('/js', express.static(path.join(__dirname, 'node_modules', 'jquery', 'dist')));
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
+
+const nav = [{ title: 'Book', link: '/books' }, { title: 'Author', link: '/authors' }];
 
 const bookRouter = require('./src/routes/bookRoutes')(nav);
 const adminRouter = require('./src/routes/adminRoutes')(nav);
