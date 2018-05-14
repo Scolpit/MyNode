@@ -8,6 +8,27 @@ module.exports = function localStrategy() {
     usernameField: 'username',
     passwordField: 'password'
   }, (username, password, done) => {
+    const url = 'mongodb://localhost:27017';
+    const dbName = 'libraryApp';
+
+    (async function AddUser() {
+      let client;
+      try {
+        client = await MongoClient.connect(url);
+        debug('Connected correctly');
+
+        const db = client.db(dbName);
+        const col = await db.collection('users');
+
+        const user = await col.findOne({ username });
+
+      } catch (e) {
+        debug(e.stack);
+      } finally {
+        client.close();
+      }
+    }());
+
     const user = {
       username, password
     };
