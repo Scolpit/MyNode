@@ -4,17 +4,11 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const app = express();
 const port = process.env.PORT || 3000;
-
-// GoodReads
-// key: X9kPIgXUjIaOkPSuGtIg
-// secret: ROZmWRv0iunhryupcMyWKatTbTUbw4RgLKVAAJw
-// ApplicationName: NunoLibrary
 
 app.use(morgan('tiny'));
 app.use(bodyParser.json());

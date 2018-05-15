@@ -65,11 +65,11 @@ function bookController(bookService, nav) {
     }());
   }
   function middleware(req, res, next) {
-    if (req.user) {
-      next();
-    } else {
-      res.redirect('/');
-    }
+    // if (req.user) {
+    next();
+    // } else {
+    //  res.redirect('/');
+    // }
   }
 
   return {

@@ -9,12 +9,14 @@ const books = [
     title: 'Titulo1',
     genre: 'Drama',
     author: 'Autor1',
+    bookId: 656,
     read: false
   },
   {
     title: 'Titulo2',
     genre: 'Historico',
     author: 'Autor2',
+    bookId: 24280,
     read: false
   },
   {
